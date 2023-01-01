@@ -1,0 +1,76 @@
+<html>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/t.css') }}"> 
+    <body>
+        <div class="text-center">
+    <button id="btn1"  onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn2" onclick="assignvalue(this.id)">&nbsp;</button>
+
+    <button id="btn3" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn4"  onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn5" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button id="btn6" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn7" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn8" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn9" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn10" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button id="btn11" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn12" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn13" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn14" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn15" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button id="btn16" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn17" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn18" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn19" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn20" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button id="btn21" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn22" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn23" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn24" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button id="btn25" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <input type="button" id="reset" value="reset" onclick="reset()">      <input type="button" id="start" value="start game" onclick="transport()">
+
+</div>
+<script src="{{ url_for('static', filename='js/selecting.js') }}"></script>
+    /* selecting algorithm
+    ========================================== */
+    
+    
+   </script>
+   
+    
+
+<script>
+user=1
+    /*
+    link retrieving 
+    */
+   
+    url= new URL(window.location.href).searchParams;
+    
+    roomname=url.get('room');
+
+
+
+
+
+    /*=======================*/
+function transport()
+{
+    sessionStorage.setItem('values',JSON.stringify(exnum));
+   
+
+
+    
+    
+    window.location.href="/game"+"?"+"room="+roomname+"&user="+user
+    
+}
+
+
+</script>
+
+    
+    </body>
+</html>

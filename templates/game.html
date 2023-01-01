@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/t.css') }}"> 
+
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script>
+    url= new URL(window.location.href).searchParams;
+    roomname=url.get('room');
+    var user=url.get('user');
+    
+
+    var socket = io.connect('http://127.0.0.1:5000');
+
+socket.on('connect', function() {
+    socket.send('User has connected!',roomname,user);
+});
+
+</script>
+
+
+<body>
+    
+    <center>
+        <div class="sign">
+            <span class="fast-flicker">b</span>i&nbsp;<span class="flicker">n</span><span class="fast-flicker">g</span><span class="flicker">o</span>
+          </div>
+        <button id="btn1" class="button" onclick="check(1,this.id)">1</button>&nbsp;
+        <button id="btn2" class="button" onclick="check(2,this.id)">2</button>&nbsp;
+    
+        <button id="btn3" class="button" onclick="check(3,this.id)">3</button>&nbsp;
+        <button id="btn4"  class="button" onclick="check(4,this.id)">4</button>&nbsp;
+        <button id="btn5" class="button" class="button" onclick="check(5,this.id)">25</button><br><br>
+        <button id="btn6" class="button" onclick="check(6,this.id)">5</button>&nbsp;
+        <button id="btn7" class="button" onclick="check(7,this.id)">6</button>&nbsp;
+        <button id="btn8" class="button"  onclick="check(8,this.id)">7</button>&nbsp;
+        <button id="btn9"  class="button" onclick="check(9,this.id)">8</button>&nbsp;
+        <button id="btn10" class="button"  onclick="check(10,this.id)">9</button><br><br>
+        <button id="btn11" class="button" onclick="check(11,this.id)">10;</button>&nbsp;
+        <button id="btn12" class="button"  onclick="check(12,this.id)">11</button>&nbsp;
+        <button id="btn13" class="button" onclick="check(13,this.id)">12</button>&nbsp;
+        <button id="btn14" class="button" onclick="check(14,this.id)">13</button>&nbsp;
+        <button id="btn15" class="button" onclick="check(15,this.id)">14</button><br><br>
+        <button id="btn16" class="button"  onclick="check(16,this.id)">15</button>&nbsp;
+        <button id="btn17" class="button" onclick="check(17,this.id)">16</button>&nbsp;
+        <button id="btn18" class="button" onclick="check(18,this.id)">17</button>&nbsp;
+        <button id="btn19" class="button"  onclick="check(19,this.id)">18</button>&nbsp;
+        <button id="btn20" class="button" onclick="check(20,this.id)">19</button><br><br>
+        <button id="btn21" class="button" onclick="check(21,this.id)">20</button>&nbsp;
+        <button id="btn22" class="button" onclick="check(22,this.id)">21</button>&nbsp;
+        <button id="btn23" class="button" onclick="check(23,this.id)">22</button>&nbsp;
+        <button id="btn24" class="button" onclick="check(24,this.id)">23</button>&nbsp;
+        <button id="btn25" class="button" onclick="check(25,this.id)">24</button><br><br>
+    </center>
+</body>
+
+<script>
+   
+   socket.on('turn',function(t)
+   {
+    turn=t;
+    
+   }
+   );
+   console.log(user)
+    function change()
+    {
+    
+    }
+    /*substituting values to button*/
+    var exnum = JSON.parse(sessionStorage.getItem('values'));
+     
+     for(i=1;i<26;i++)
+     {id="btn"+i
+         document.getElementById(id).innerHTML=exnum[i]
+     }
+     
+ if (user==1){
+     socket.emit('values',exnum);
+ }
+ else if(user==2)
+ {
+    socket.emit('values2',exnum);
+ }
+ </script>
+
+
+
+
+<script>
+
+    function check(index,id)
+    {    
+        
+        console.log(index)
+       
+
+        if(user==1 && turn%2==1){
+            console.log("user 1 turn is : ",turn)
+            console.log("user1 played and next is user2 ")
+    console.log(turn%2);
+        socket.emit('clicked',index,exnum[index],user,roomname)
+        }
+
+
+
+
+
+        else if (user==2 && turn%2==0)
+        {
+            console.log("user2 turn is : ",turn)
+            console.log("user2 played and next is user1 ")
+    console.log(turn%2);
+            socket.emit('clicked2',index,exnum[index],user,roomname)
+
+        }
+    }
+
+
+
+
+    socket.on('light',function(n) {
+
+      
+        console.log("received number is :");
+        console.log(exnum.indexOf(n));
+        n=exnum.indexOf(n);
+        id="btn"+n
+        document.getElementById(id).className="button1"
+    });
+</script>
+</html>

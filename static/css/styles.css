@@ -1,0 +1,82 @@
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, #0f172b , #0a193b);
+    font-family: 'Oswald', sans-serif;
+  }
+  .button {
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 22px;
+    
+    position: relative;
+    background-color: #16a085;
+    border: none;
+    color: #fff;
+   
+    width: 60px;
+    height:60px;
+    text-align: center;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    
+    border-radius: 4px;
+  }
+
+  .button:hover {
+    background: #fff;
+    box-shadow: 0px 2px 10px 5px #1abc9c;
+    color: #000;
+  }
+
+  .button:after {
+    content: "";
+    background: #1abc9c;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  .button1{
+
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 22px;
+    
+    position: relative;
+    background-color: #16a085;
+    border: none;
+    color: #fff;
+   
+    width: 60px;
+    height:60px;
+    text-align: center;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0px 2px 10px 5px #1abc9c;
+    color: #000;
+    border-radius: 4px;
+  }
+  .button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+  .button:active{
+    background-color: #1abc9c;
+  }
+  .button:focus { outline:0; }

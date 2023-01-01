@@ -1,0 +1,20 @@
+<html>
+    <body>
+
+<button onclick="g()">generate</button>
+
+<script>
+
+function g()
+{var user=1
+
+roomname=Math.random().toString(36).slice(2)
+document.write(roomname)
+window.location.href="/bingo"+"?"+"room="+roomname+"&user="+user
+    
+}
+
+</script>
+
+    </body>
+</html>
