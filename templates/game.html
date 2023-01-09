@@ -4,6 +4,18 @@
 
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
 <script>
+/*  delete db*/
+window.addEventListener('beforeunload', (event) => {
+	event.returnValue = `Are you sure you want to leave?`;
+	var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "http://127.0.0.1:5000/delete?room="+roomname);  /*link required*/
+xhttp.send(); 
+});
+/*=============*/
+
+
+
+
     url= new URL(window.location.href).searchParams;
     roomname=url.get('room');
     var user=url.get('user');
@@ -18,7 +30,7 @@ socket.on('connect', function() {
 </script>
 
 
-<body>
+<body >
     
     <center>
         <div class="sign">
@@ -35,7 +47,7 @@ socket.on('connect', function() {
         <button id="btn8" class="button"  onclick="check(8,this.id)">7</button>&nbsp;
         <button id="btn9"  class="button" onclick="check(9,this.id)">8</button>&nbsp;
         <button id="btn10" class="button"  onclick="check(10,this.id)">9</button><br><br>
-        <button id="btn11" class="button" onclick="check(11,this.id)">10;</button>&nbsp;
+        <button id="btn11" class="button" onclick="check(11,this.id)">10</button>&nbsp;
         <button id="btn12" class="button"  onclick="check(12,this.id)">11</button>&nbsp;
         <button id="btn13" class="button" onclick="check(13,this.id)">12</button>&nbsp;
         <button id="btn14" class="button" onclick="check(14,this.id)">13</button>&nbsp;
@@ -54,6 +66,7 @@ socket.on('connect', function() {
 </body>
 
 <script>
+   
    
    socket.on('turn',function(t)
    {

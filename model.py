@@ -28,6 +28,14 @@ class user(UserMixin,db.Model):
     id=db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(20),unique=True)
     password=db.Column(db.String(20))    
+
+class live_users(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    user=db.Column(db.String(50),unique=True)
+    u1=db.Column(db.Integer) 
+    u2=db.Column(db.Integer)
+
+
 # Creating an SQLAlchemy instance
 db.create_all()
 

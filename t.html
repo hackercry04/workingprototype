@@ -3,15 +3,20 @@
 
 
 
-<body onbeforeunload="return myFunction()">
+<body onbeforeunload="alert();">
 
 
 
 
 	<script>
-		function myFunction() {
-			return "This document is ready to load";
-		}
+		
+window.addEventListener('beforeunload', (event) => {
+	event.returnValue = `Are you sure you want to leave?`;
+	var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "http://d4d6-2409-4073-4e92-9a2d-2566-4ccd-5926-3876.ngrok.io");
+xhttp.send(); 
+});
+
 	</script>
 </body>
 

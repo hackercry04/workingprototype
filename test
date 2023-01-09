@@ -116,10 +116,7 @@ def game():
 def bingo():
     return render_template('bingo1.html')
 
-@app.route("/home")
-@login_required
-def home():
-    return render_template("/home.html")
+
 
 @login_required
 @app.route("/delete")
@@ -129,23 +126,23 @@ def delete():
 
    db = sqlite3.connect('arrays.db')
    cursor = db.cursor()
-   #user = "select u1,u2 from roomgroup where roomname=?"
+   user = "select u1,u2 from roomgroup where roomname=?"
    delete_room="delete from rooms where roomn=?"
-   #delete_room_group="delete from roomgroup where roomname=?"
-   delete_room_group_user="delete  from roomgroup where roomname=? and u1=? or u2=?"
+   delete_room_group="delete from roomgroup where roomname=?"
    delete_u='delete from numers where usession=?'
    print("room is",room)
-   #u=cursor.execute(user,[room]).fetchall()
-   cursor.execute(delete_room,[room])
-   cursor.execute(delete_room_group_user,[room,id,id])
-
-   cursor.execute(delete_u,[id])
-   
+   u=cursor.execute(user,[room]).fetchall()
+   #cursor.execute(delete_room,[room])
+   #cursor.execute(delete_room_group,[room])
+   u1=u[0][0]
+   u2=u[0][1]
+   #cursor.execute(delete_u,[u1])
+   #cursor.execute(delete_u,[u2])
 
   
    db.commit()
    cursor.close()
-   #print('deleted users are',u1,u2)
+   print('deleted users are',u1,u2)
    return 0
 
 
@@ -194,7 +191,6 @@ def insertuserstogroup(room,uid,session):
           print("this worked in user1 in db")
 
           sql_command="INSERT INTO roomgroup(roomname,u1) VALUES(?,?)"
-          cursor.execute(sql_command,[room,session])
           db.commit()
           cursor.close()
           return 0
@@ -303,14 +299,17 @@ def adding0array(s):
    return 0
 
 
-   
+def updateturns(roomname,turn):
+    
+
+    return 0   
 
 def updating(i,arr):
     db = sqlite3.connect('arrays.db')
     cursor = db.cursor()
     i=str(i)
     arr=str(arr)
-    sql_update_query = "Update numers set valuate = ? where usession= ?"
+    sql_update_query = "Update numers set valuate = ? where id = ?"
     cursor.execute(sql_update_query,[arr,i])
     db.commit()
     cursor.close()
@@ -320,7 +319,7 @@ def getarray_with_id(id):
     
     db = sqlite3.connect('arrays.db')
     cursor = db.cursor()
-    getquery="SELECT valuate FROM numers where usession=?"
+    getquery="SELECT valuate FROM numers where id=?"
     f=cursor.execute(getquery,[id]).fetchall()
     f=literal_eval(f[0][0])
     db.commit()
