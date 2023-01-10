@@ -31,9 +31,9 @@ class user(UserMixin,db.Model):
 
 class live_users(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    user=db.Column(db.String(50),unique=True)
-    u1=db.Column(db.Integer) 
-    u2=db.Column(db.Integer)
+    users=db.Column(db.String(50),unique=True)
+    s=db.Column(db.String(10),unique=True)
+
 
 
 # Creating an SQLAlchemy instance

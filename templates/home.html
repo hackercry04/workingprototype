@@ -1,11 +1,31 @@
 <html>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> 
+    <body>
+    <div class="bgimage">
+        <div class="menu">
 
-<body>
+            <div class="leftmenu">
+                <h4> home </h4>
+            </div>
+
+            <div class="rightmenu">
+                <ul>
+                    <li id="firstlist"><a href="/Home">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/online">online users</a></li>
+                    <li><a href="/invites">invites</a></li>
+                    <li>About Us</li>
+                    <li><a href="/logout">logout</a></li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="text">
+            
+        </div>
+
+    </div>
     
-<h1>home page</h1>
-<div id="home_catagories">
-<a href="/linkgen">link generate</a><a href="/invites">invite</a>
-</div>
-
 </body>
 </html>

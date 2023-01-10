@@ -75,11 +75,24 @@ def register():
 @app.route("/logout")
 @login_required
 def logout():
+    
+
+    db = sqlite3.connect('arrays.db')
+    cursor = db.cursor()
+        
+    delete="delete from live_users where s=?"
+    print(session)
+    cursor.execute(delete,[session['_user_id']])
+    db.commit()
+    cursor.close()
     logout_user()
     return 'you are logged out'
 @app.route("/login")
 def login():
     return render_template('login.html')
+
+
+
 @app.route("/logmein",methods=["POST"])
 def logme():
     global u
@@ -89,9 +102,18 @@ def logme():
     u=user.query.filter_by(username=username,password=password).first()  
     if u:
         login_user(u)
+
+        db = sqlite3.connect('arrays.db')
+        cursor = db.cursor()
+        #user = "select u1,u2 from roomgroup where roomname=?"
+        add_live_user="insert into live_users(users,s) values(?,?)"
+        cursor.execute(add_live_user,[username,session['_user_id']])
+        db.commit()
+        cursor.close()
+
         ##holy fuck here is the session
         
-        return link()
+        return home()
     elif password=='':
         return 'enter the password'
     else:
@@ -101,6 +123,13 @@ def logme():
 def current():
     
     return 'currentuser is '+u.username
+
+@app.route("/online")
+@login_required
+def online():
+    return render_template('online.html')
+
+
 
 @app.route("/linkgen")
 @login_required
