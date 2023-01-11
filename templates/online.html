@@ -12,12 +12,18 @@ socket.on('users',function(u) {
     document.getElementById("u").innerHTML = "";
     for(a=0;a<u.length;a++)
  {
-    document.getElementById("u").innerHTML+="<li>"+u[a]+"</li>";
+    document.getElementById("u").innerHTML+="<li>"+"<button onclick=f("+u[a]+")>"+u[a]+"</button>"+"</li>";
  }
     console.log('this worked');
 
 
 });
+
+
+
+
+
+
 </script>
     <body>
         <div id="u"></div>
@@ -25,6 +31,20 @@ socket.on('users',function(u) {
 
 </body>
 
+<script>
 
+    function f(v)
+    {
+        
+
+roomname=Math.random().toString(36).slice(2)
+console.log(v)
+join_link=roomname
+host_link="/bingo"+"?"+"room="+roomname+"&user="+1
+socket.emit('invite',join_link,v)
+
+
+    }
+</script>
 
 </html>

@@ -38,6 +38,12 @@ class live_users(db.Model):
 class online(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     u=db.Column(db.String(50),unique=True)
+
+
+class invites(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    roomname=db.Column(db.String(10))  
+    uname=db.Column(db.String(10))
     
 
 

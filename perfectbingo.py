@@ -570,14 +570,20 @@ def delete_online_user():
 
 
 
-
+def store_invite(room,uname):
+    db=sqlite3.connect('arrays.db')
+    cursor=db.cursor()
+    insert="insert into invites(roomname,uname) values(?,?)"
+    cursor.execute(insert,[room,uname])
+    db.commit()
+    cursor.close()
 
 
 
 
 
 #online users------------------------------------------------
-
+@login_required
 @socketio.on('message',namespace='/onlineusers')
 def onlidf(msg):
     print('chat online connected',msg)
@@ -590,6 +596,13 @@ def onlidf(msg):
 def disconnect():
     print("client disconnecte d")
     delete_online_user()
+
+@socketio.on('invite',namespace='/onlineusers')
+def storeinvite(room,uname):
+    store_invite(room,uname)
+
+
+    
 
 #online users-------------------------------------------------
 
