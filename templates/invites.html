@@ -1,0 +1,51 @@
+<html>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://127.0.0.1:5000/sendinvite');
+    socket.on('connect', function() {
+    socket.send('User has connected! on send invite endpoint ');
+});
+
+
+
+socket.on('users',function(u)
+
+{
+   
+    document.getElementById("u").innerHTML+="<li>"+u[0][3]+" invited you for a match  "+"<button value="+u[0][1]+" onclick=accept(this.value)>"+"accept</button>"+"<button value="+u[0][1]+"   onclick=reject(this.value)>reject</button>"+"</li>"
+ 
+console.log( typeof(u))
+    console.log(u["1"]);
+
+
+
+    
+});
+</script>
+
+
+
+
+<body>
+
+<div id="u"></div>
+</body>
+<script>
+function accept(r){
+    link="/bingo"+"?"+"room="+r+"&user="+2
+    console.log(link)
+    socket.emit('removelink',r);
+    window.location=link
+
+
+}/* remove link from db after user accept or rehject the link */
+function reject()
+{
+  socket.emit('removelink',r);
+
+}
+
+</script>
+
+</html>

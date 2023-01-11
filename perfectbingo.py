@@ -150,6 +150,13 @@ def bingo():
 def home():
     return render_template("/home.html")
 
+
+
+@app.route("/invites")
+@login_required
+def invitepage():
+    return render_template("/invites.html")    
+
 @login_required
 @app.route("/delete")
 def delete():
@@ -573,15 +580,31 @@ def delete_online_user():
 def store_invite(room,uname):
     db=sqlite3.connect('arrays.db')
     cursor=db.cursor()
-    insert="insert into invites(roomname,uname) values(?,?)"
-    cursor.execute(insert,[room,uname])
+    insert="insert into invites(roomname,uname,hostname) values(?,?,?)"
+    get_host="select username from user where id=?"
+    host=cursor.execute(get_host,[session['_user_id']]).fetchall()[0][0]
+    if uname!=host:
+       cursor.execute(insert,[room,uname,host])
     db.commit()
     cursor.close()
 
 
 
+def send_back_invites():
+    id=session['_user_id']
+    db=sqlite3.connect('arrays.db')
+    cursor=db.cursor()
+    get_user_name="select username from user where id=?"
+    get_room="select * from invites where uname=? "
+    user_id=cursor.execute(get_user_name,[id]).fetchall()[0][0]
+    print("fjksdhjfhjskd",user_id)
+    roomname=cursor.execute(get_room,[user_id]).fetchall()
+    
+    print("dfsfdsf",roomname)
 
-
+    db.commit()
+    cursor.close()
+    return roomname
 #online users------------------------------------------------
 @login_required
 @socketio.on('message',namespace='/onlineusers')
@@ -600,6 +623,23 @@ def disconnect():
 @socketio.on('invite',namespace='/onlineusers')
 def storeinvite(room,uname):
     store_invite(room,uname)
+
+
+
+@login_required
+@socketio.on('message',namespace='/sendinvite')
+def sendinvite(msg):
+    print('chat online connected',msg)
+    send_back_invites()
+    socketio.emit("users",send_back_invites(),namespace='/sendinvite')
+    
+
+@socketio.on('removelink',namespace='/sendinvite')
+def removelink(msg):
+    pass
+    
+
+
 
 
     

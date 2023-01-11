@@ -44,6 +44,7 @@ class invites(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     roomname=db.Column(db.String(10))  
     uname=db.Column(db.String(10))
+    hostname=db.Column(db.String(10))
     
 
 
