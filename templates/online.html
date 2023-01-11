@@ -1,0 +1,30 @@
+<html>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://127.0.0.1:5000/onlineusers');
+    socket.on('connect', function() {
+    socket.send('User has connected!');
+});
+
+socket.on('users',function(u) {
+    console.log(u);
+    document.getElementById("u").innerHTML = "";
+    for(a=0;a<u.length;a++)
+ {
+    document.getElementById("u").innerHTML+="<li>"+u[a]+"</li>";
+ }
+    console.log('this worked');
+
+
+});
+</script>
+    <body>
+        <div id="u"></div>
+
+
+</body>
+
+
+
+</html>

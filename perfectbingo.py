@@ -530,6 +530,68 @@ def click2(index,n1,id,roomname):
 #------------------------------------
 
 
+def add_online_users():
+    db = sqlite3.connect('arrays.db')
+    cursor = db.cursor()
+    t="nothing"
+    check='select count(*) from online where u=?'
+    insert="insert into online(u) values(?)"
+    get_query="select users from live_users where s=? "
+    user=cursor.execute(get_query,[session['_user_id']]).fetchall()[0][0]
+    select_all="select u from online"
+
+
+    print(user)
+    
+    
+    if(cursor.execute(check,[user]).fetchall()[0][0]==0):
+            
+            cursor.execute(insert,[user])
+            
+            db.commit()
+            
+
+
+    all_users=cursor.execute(select_all).fetchall()
+    cursor.close()       
+    return all_users
+
+
+def delete_online_user():
+    db = sqlite3.connect('arrays.db')
+    cursor = db.cursor()
+    get_query="select users from live_users where s=? "
+    user=cursor.execute(get_query,[session['_user_id']]).fetchall()[0][0]
+    f="delete from online where u=?"
+    cursor.execute(f,[user])
+    db.commit()
+    cursor.close()
+
+
+
+
+
+
+
+
+
+
+#online users------------------------------------------------
+
+@socketio.on('message',namespace='/onlineusers')
+def onlidf(msg):
+    print('chat online connected',msg)
+    u=add_online_users()
+    socketio.emit("users",u,namespace='/onlineusers')
+    print('emitted users')
+
+
+@socketio.on('disconnect',namespace='/onlineusers')
+def disconnect():
+    print("client disconnecte d")
+    delete_online_user()
+
+#online users-------------------------------------------------
 
 
 

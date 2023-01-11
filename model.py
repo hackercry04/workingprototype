@@ -35,6 +35,11 @@ class live_users(db.Model):
     s=db.Column(db.String(10),unique=True)
 
 
+class online(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    u=db.Column(db.String(50),unique=True)
+    
+
 
 # Creating an SQLAlchemy instance
 db.create_all()
