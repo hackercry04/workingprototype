@@ -23,6 +23,7 @@ class roomgroup(db.Model):
     roomname=db.Column(db.String(50),unique=True)
     u1=db.Column(db.Integer) 
     u2=db.Column(db.Integer)     
+    
 
 class user(UserMixin,db.Model):
     id=db.Column(db.Integer,primary_key=True)
