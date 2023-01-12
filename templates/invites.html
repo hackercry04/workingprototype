@@ -12,13 +12,18 @@
 socket.on('users',function(u)
 
 {
+    document.getElementById("u").innerHTML="";
+    l=Object.keys(u).length
+
+    for (i=0;i<l;i++)
+    {
    
-    document.getElementById("u").innerHTML+="<li>"+u[0][3]+" invited you for a match  "+"<button value="+u[0][1]+" onclick=accept(this.value)>"+"accept</button>"+"<button value="+u[0][1]+"   onclick=reject(this.value)>reject</button>"+"</li>"
+    document.getElementById("u").innerHTML+="<li>"+u[i][3]+" invited you for a match  "+"<button value="+u[i][1]+" onclick=accept(this.value)>"+"accept</button>"+"<button value="+u[i][1]+"   onclick=reject(this.value)>reject</button>  <b> room is </b>"+"<b>"+u[0][1]+"</b>"+"</li>"
  
 console.log( typeof(u))
     console.log(u["1"]);
 
-
+    }
 
     
 });

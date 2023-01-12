@@ -42,6 +42,7 @@ roomname=Math.random().toString(36).slice(2)
 join_link=roomname
 host_link="/bingo"+"?"+"room="+roomname+"&user="+1
 socket.emit('invite',join_link,v)
+window.location=host_link
 
 
     }

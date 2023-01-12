@@ -107,11 +107,14 @@ def logme():
         cursor = db.cursor()
         #user = "select u1,u2 from roomgroup where roomname=?"
         add_live_user="insert into live_users(users,s) values(?,?)"
-        cursor.execute(add_live_user,[username,session['_user_id']])
-        db.commit()
+        check="select count(*) from live_users where users=?"
+        print('hereis t',cursor.execute(check,[username]).fetchall()[0][0])
+        if cursor.execute(check,[username]).fetchall()[0][0]==0:
+           cursor.execute(add_live_user,[username,session['_user_id']])
+           db.commit()
         cursor.close()
 
-        ##holy fuck here is the session
+        
         
         return home()
     elif password=='':
@@ -583,7 +586,10 @@ def store_invite(room,uname):
     insert="insert into invites(roomname,uname,hostname) values(?,?,?)"
     get_host="select username from user where id=?"
     host=cursor.execute(get_host,[session['_user_id']]).fetchall()[0][0]
-    if uname!=host:
+    check="select count(*) from invites where uname=? and hostname=?";
+
+    if uname!=host: #and (cursor.execute(check,[uname,host]).fetchall()[0][0]==0)
+
        cursor.execute(insert,[room,uname,host])
     db.commit()
     cursor.close()
@@ -630,8 +636,11 @@ def storeinvite(room,uname):
 @socketio.on('message',namespace='/sendinvite')
 def sendinvite(msg):
     print('chat online connected',msg)
-    send_back_invites()
-    socketio.emit("users",send_back_invites(),namespace='/sendinvite')
+    r=send_back_invites()
+    join_room(r[0][2])
+    socketio.emit("users",send_back_invites(),namespace='/sendinvite',to=r[0][2])
+    print(r[0][2],"socketrito")
+    leave_room(r[0][2])
     
 
 @socketio.on('removelink',namespace='/sendinvite')
