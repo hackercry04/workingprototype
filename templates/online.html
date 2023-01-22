@@ -1,4 +1,5 @@
 <html>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/online.css') }}"> 
 
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
 <script>
@@ -12,7 +13,7 @@ socket.on('users',function(u) {
     document.getElementById("u").innerHTML = "";
     for(a=0;a<u.length;a++)
  {
-    document.getElementById("u").innerHTML+="<li>"+"<button "+"value="+u[a]+"   onclick=f(this.value)>"+u[a]+"</button>"+"</li>";
+    document.getElementById("u").innerHTML+="<li >"+"<button "+"value="+u[a]+"   onclick=f(this.value)>"+u[a]+"</button>"+"</li>";
  }
     console.log(u[a]);
 
@@ -26,9 +27,28 @@ socket.on('users',function(u) {
 
 </script>
     <body>
-        <div id="u"></div>
+        
+       <div class="top">
+        <a href="/invites">invites</a><br><br>
+        <input type="text" id="Search" onkeyup="myFunction()" 
+        placeholder="Please enter a search term.." title="Type in a name"><br><br>
 
-<a href="/invites">invites</a>
+       </div>
+        <div class="left">
+            
+        <ul id="mylist">
+        <div id="u"></div>
+        </div>
+    </ul>
+        
+        <div class="right">
+            
+            <div id="ff">chat</div>
+
+            
+            </div>
+
+
 </body>
 
 <script>
@@ -47,5 +67,31 @@ window.location=host_link
 
     }
 </script>
+
+
+
+
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById('Search');
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("mylist");
+      li = ul.getElementsByTagName('li');
+      console.log(li[0].outerText)
+    
+      // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < li.length; i++) {
+       
+        txtValue = li[i].outerText
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+    </script>
 
 </html>
