@@ -30,8 +30,8 @@ socket.on('users',function(u) {
         
        <div class="top">
         <a href="/invites">invites</a><br><br>
-        <input type="text" id="Search" onkeyup="myFunction()" 
-        placeholder="Please enter a search term.." title="Type in a name"><br><br>
+        <input type="text" id="Search" onkeyup="search()" 
+        placeholder="search user" title="Type in a name"><br><br>
 
        </div>
         <div class="left">
@@ -42,10 +42,15 @@ socket.on('users',function(u) {
     </ul>
         
         <div class="right">
-            
-            <div id="ff">chat</div>
+            chat
+            <div id="ff">
+                
+            </div>
 
             
+            </div>
+            <div class="chatbox">
+                <input type="text" id="text"><button onclick="sendmsg()">send</button>
             </div>
 
 
@@ -72,14 +77,14 @@ window.location=host_link
 
 
 <script>
-    function myFunction() {
+    function search() {
       // Declare variables
       var input, filter, ul, li, a, i, txtValue;
       input = document.getElementById('Search');
       filter = input.value.toUpperCase();
       ul = document.getElementById("mylist");
       li = ul.getElementsByTagName('li');
-      console.log(li[0].outerText)
+      console.log(filter)
     
       // Loop through all list items, and hide those who don't match the search query
       for (i = 0; i < li.length; i++) {
@@ -93,5 +98,44 @@ window.location=host_link
       }
     }
     </script>
+
+
+
+<script>
+function sendmsg()
+{
+
+    socket.emit('sendingmsg',document.getElementById("text").value);
+}
+
+socket.on('fast',function(m){
+
+displaymsg(m)
+deletemsg();
+});
+
+
+
+
+function displaymsg(m)
+{
+ document.getElementById("ff").innerHTML+="<li>"+m[0]+'<br>&nbsp;&nbsp;&nbsp;&nbsp;'+m[1]+"</li>"
+
+
+}
+
+
+function deletemsg()
+{
+ div=document.getElementById('ff');
+ li=div.getElementsByTagName("li")
+ if(li.length>19)
+ {
+
+    li[0].remove()
+ }
+
+}
+</script>
 
 </html>

@@ -208,14 +208,17 @@ def delete():
 
 turn=1
 
-
-
-
-
-
 f1=f2=f3=f4=f5=f6=f7=f8=f9=f10=f11=f12=0
+
+
+
+
+
+
+
 state="not bingo"
 socketio = SocketIO(app, cors_allowed_origins='*')
+state="not_bingo"
 
 
 user1=[]
@@ -366,11 +369,15 @@ def getarray_with_id(id):
     cursor.close()
     return f
 
-    
-def valuating(v,u):
-            global f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,state
+def valuating(v,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12):
+            u="null"
+            global state
+           
             
-            print(v[1]+v[2]+v[3]+v[4]+v[5])
+            
+            
+            
+            
             if (v[1]+v[2]+v[3]+v[4]+v[5]==5):
                 f1=1
             if (v[6]+v[7]+v[8]+v[9]+v[10]==5):
@@ -399,6 +406,10 @@ def valuating(v,u):
                 print("BINGO",flush=True)
                 state="bingo"
             print(v,flush=True)
+
+            print("the function values for ")
+            print(v)
+            print(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,state,u)
             return(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,state,u)
 
 
@@ -418,11 +429,18 @@ def handleMessage(m,roomname,userid):
     print("sdkfsodjfisdhjfhsdakjhfkjsdhjksgdhgsdhj",turn)
     
     socketio.emit('turn',turn,to=roomname)
+
+
+
+
+
+
     
     
     
     
     
+
 
 
 
@@ -447,8 +465,9 @@ def num(x):
     user1=x
     
     print("exnum array: ",x)
-@socketio.on('clicked')
+@socketio.on('clicked') # when user1 clicks a button
 def click(index,n,id,roomname):
+    f1=f2=f3=f4=f5=f6=f7=f8=f9=f10=f11=f12=0
     global clicked ,user1
     clicked=n
     print("user1 clciked number is: ",n,"and id is:  ",id," with index", index)
@@ -484,8 +503,16 @@ def click(index,n,id,roomname):
     turn=turn+1
     updateturn(roomname,turn)
     #----------------
+    
     socketio.emit('turn',turn,to=roomname)
     print("turn is ",turn)
+   
+    join_room(str(u1)+'r')
+    print(str(u1)+"joined the room "+str(u1)+'r')
+   
+    socketio.emit('statics',[valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u1)+'r')
+    socketio.emit('statics',[valuating(valuate1,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u2)+'r')
+   
     
     
 
@@ -498,7 +525,7 @@ def num2(x):
     user2=x
     
     print("user2 exnum array: ",x,flush=True)
-@socketio.on('clicked2')
+@socketio.on('clicked2') #when user 2 clicked a button
 def click2(index,n1,id,roomname):
     global clicked2
     clicked2=n1
@@ -532,11 +559,20 @@ def click2(index,n1,id,roomname):
     socketio.emit('turn',turn,to=roomname)
     
 
-
-
+   
+    print("valuatin",valuating(valuate1,0,0,0,0,0,0,0,0,0,0,0,0))
+    print("valuatin2",valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0))
+    
+   
     #valuating values-----------------
   #sending back possible matched bingo lines ,with state and user id
-    socketio.emit('states',valuating(valuate,0),to=roomname)
+
+    join_room(str(u2)+'r')
+    print(str(u2)+"joined the room "+str(u2)+'r')
+   
+    socketio.emit('statics',[valuating(valuate1,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u2)+'r')
+    socketio.emit('statics',[valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u1)+'r')
+    
 #------------------------------------
 
 
@@ -611,6 +647,20 @@ def send_back_invites():
     db.commit()
     cursor.close()
     return roomname
+def get_name():
+    id=session['_user_id']
+    db=sqlite3.connect('arrays.db')
+    cursor=db.cursor()
+    get_user_name="select username from user where id=?"
+
+    user_id=cursor.execute(get_user_name,[id]).fetchall()[0][0]
+    db.commit()
+    cursor.close()
+    
+    return user_id
+
+
+
 #online users------------------------------------------------
 @login_required
 @socketio.on('message',namespace='/onlineusers')
@@ -630,6 +680,13 @@ def disconnect():
 def storeinvite(room,uname):
     store_invite(room,uname)
 
+
+@socketio.on('sendingmsg',namespace='/onlineusers')
+def sendmessage(msg):
+    print(msg)
+    n=get_name()
+    print("here is the user name",n)
+    socketio.emit('fast',[n,msg],namespace='/onlineusers')
 
 
 @login_required

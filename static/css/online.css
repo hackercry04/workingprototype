@@ -1,27 +1,38 @@
 
   
-/* Control the left side */
-  .left {
-    width: 30%;
-    left: 0;
-    background-color: orange;
-  }
-  
-  /* Control the right side */
-  .right {
-    
-    width: 70%;
-    float: right;
-    right: 0;
-    height: 100%;
-    background-color: red;
-    border: 2px black;
-  }
+
   
  .top{
 
     height: 10%;
-    top:0;
+    
     background-color: green;
+
+ }
+
+
+ /* Control the left side */
+ .left {
+    float:left;
+  width:30%;
+  background-color:yellow;
+  }
+  
+  /* Control the right side */
+  .right {
+    float: right;
+    width: 70%;
+    background-color:#00FF00;
+    height:80%;
+    overflow:scroll;
+    
+  }
+
+ .chatbox
+ {background-color: aqua;
+    width: 70%;
+    float: right;
+    
+
 
  }

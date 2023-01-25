@@ -33,9 +33,10 @@ socket.on('connect', function() {
 <body >
     
     <center>
-        <div class="sign">
-            <span class="fast-flicker">b</span>i&nbsp;<span class="flicker">n</span><span class="fast-flicker">g</span><span class="flicker">o</span>
-          </div>
+       
+            <span id=1 class="sign1">b</span><span id=2 class="sign1">i&nbsp;</span><span id=3 class="sign1">n</span><span id="4" class="sign1">g</span><span id=5 class="sign1">o</span>
+        
+          <div id="bin">
         <button id="btn1" class="button" onclick="check(1,this.id)">1</button>&nbsp;
         <button id="btn2" class="button" onclick="check(2,this.id)">2</button>&nbsp;
     
@@ -62,6 +63,7 @@ socket.on('connect', function() {
         <button id="btn23" class="button" onclick="check(23,this.id)">22</button>&nbsp;
         <button id="btn24" class="button" onclick="check(24,this.id)">23</button>&nbsp;
         <button id="btn25" class="button" onclick="check(25,this.id)">24</button><br><br>
+        </div>
     </center>
 </body>
 
@@ -140,5 +142,39 @@ socket.on('connect', function() {
         id="btn"+n
         document.getElementById(id).className="button1"
     });
+
+
+
+    socket.on('statics',function(s) {
+        count=0
+   
+    for(o=0;o<12;o++)
+    
+    {   
+        count=s[0][o]+count
+    }
+
+    if(count>=5)
+    {
+        alert("bingo");
+    }
+    console.log(count)
+    if (count!=0)
+    {
+    glow(count)}
+    console.log("statics are ")
+    console.log(s)
+    });
+
+
+
+
+    function glow(id)
+    {
+        id=String(id)
+      document.getElementById(id).className="sign";
+
+    }
 </script>
+<button onclick="glow(1)"></button>
 </html>
