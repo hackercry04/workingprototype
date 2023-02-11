@@ -1,11 +1,67 @@
 <html>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylus.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
     <body>
-        <form action="/logmein" method="POST">
-            username&nbsp;<input type="text" name="username">
-            password&nbsp;<input type="text" name="password">
-            <input type="submit" value="click here to submit">
+
+        <div class="box">
+
+
+          
+
+          <div class="hero-container">
+            <div class="environment"></div>
+            <h2 class="hero glitch layers" data-text="BINGO"><span>BINGO</span></h2>
+          </div>
             
 
-        </form>
+
+
+
+
+
+
+            
+         </div>
+        
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="/logmein" method="POST" id="form1">
+              <div class="user-box">
+                <input type="text" name="username" required="username">
+                <label>Username</label>
+              </div>
+              <div class="user-box">
+                <input type="password" name="password" required="password">
+                <label>Password</label>
+              </div>
+              <a onclick=" document.getElementById('form1').submit();">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit
+              </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a onclick= "window.location='/signup'">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Register
+              </a>
+            </form>
+            <div class="error" id="error">
+              {% for message in get_flashed_messages() %}
+                  <p>{{ message }}</p>
+              {% endfor %}</div>
+          </div>
+          <script>
+   const box = document.getElementById('error');
+   box.addEventListener('click', () => {
+  box.remove();
+});
+
+          </script>
+          
     </body>
 </html>

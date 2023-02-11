@@ -1,4 +1,4 @@
-from flask import Flask ,session,render_template,request
+from flask import Flask, flash ,session,render_template,request
 from ast import literal_eval
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, send,emit,join_room, leave_room
@@ -86,7 +86,7 @@ def logout():
     db.commit()
     cursor.close()
     logout_user()
-    return 'you are logged out'
+    return render_template('login.html')
 @app.route("/login")
 def login():
     return render_template('login.html')
@@ -118,9 +118,12 @@ def logme():
         
         return home()
     elif password=='':
-        return 'enter the password'
+        flash("enter the password.")
+        return render_template("login.html")   
+        
     else:
-        return 'no user found'    
+        flash("incorrect username or password.")
+        return render_template("login.html")   
 @app.route("/profile")
 @login_required
 def current():
