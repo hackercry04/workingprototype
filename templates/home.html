@@ -1,31 +1,23 @@
 <html>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> 
     <body>
-    <div class="bgimage">
-        <div class="menu">
-
-            <div class="leftmenu">
-                <h4> home </h4>
-            </div>
-
-            <div class="rightmenu">
-                <ul>
-                    <li id="firstlist"><a href="/Home">Home</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/online">online users</a></li>
-                    <li><a href="/invites">invites</a></li>
-                    <li>About Us</li>
-                    <li><a href="/logout">logout</a></li>
-                    <li>Contact</li>
-                </ul>
-            </div>
-
-        </div>
-        <div class="text">
-            
-        </div>
-
-    </div>
+        <ul>
+            <li style="--clr:#00ade1">
+              <a href="/online" data-text="&nbsp;Online">&nbsp;Online&nbsp;</a>
+            </li>
+            <li style="--clr:#ff6492">
+              <a href="/invites" data-text="&nbsp;Invites">&nbsp;Invites&nbsp;</a>
+            </li>
+            <li style="--clr:#ffdd1c">
+              <a href="/contact" data-text="&nbsp;Contact">&nbsp;Contact&nbsp;</a>
+            </li>
+            <li style="--clr:#00dc82">
+              <a href="/about" data-text="&nbsp;about">&nbsp;About&nbsp;</a>
+            </li>
+            <li style="--clr:#dc00d4">
+              <a href="/logout" data-text="&nbsp;Logout">&nbsp;Logout&nbsp;</a>
+            </li>
+          </ul>
     
 </body>
 </html>
