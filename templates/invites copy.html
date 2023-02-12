@@ -1,9 +1,7 @@
 <html>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/invites.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/[css file]') }}"> 
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
-    
 <script>
-    
     var socket = io.connect('http://127.0.0.1:5000/sendinvite');
     socket.on('connect', function() {
     socket.send('User has connected! on send invite endpoint ');
@@ -20,7 +18,7 @@ socket.on('users',function(u)
     for (i=0;i<l;i++)
     {
    
-    document.getElementById("u").innerHTML+='<div class="container"><div class="card"><div class="face face1"><div class="content"><i class="fab fa-windows"></i>            <h3><img src=/static/image/mail-256.png><br>You Got An Invitation From '+u[i][3]+'</h3></div></div><div class="face face2"><div class="content"><p>room name is '+u[0][1] +'</p><a id=accept href="bingo?room='+u[i][1]+'&user=2" value='+u[i][1]+' type="button" onclick=accept(this.value)>Accept</a><a href="#" type="button">Reject</a></div></div></div><br><br><br>'
+    document.getElementById("u").innerHTML+="<li>"+u[i][3]+" invited you for a match  "+"<button value="+u[i][1]+" onclick=accept(this.value)>"+"accept</button>"+"<button value="+u[i][1]+"   onclick=reject(this.value)>reject</button>  <b> room is </b>"+"<b>"+u[0][1]+"</b>"+"</li>"
  
 console.log( typeof(u))
     console.log(u["1"]);
@@ -35,19 +33,15 @@ console.log( typeof(u))
 
 
 <body>
-<br><br><br>
+
 <div id="u"></div>
-
-
-
-
 </body>
 <script>
 function accept(r){
     link="/bingo"+"?"+"room="+r+"&user="+2
     console.log(link)
     socket.emit('removelink',r);
-   /* window.location=link*/
+    window.location=link
 
 
 }/* remove link from db after user accept or rehject the link */
