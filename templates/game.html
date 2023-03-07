@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/t.css') }}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/toggle.css') }}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}"> 
 
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
 /*  delete db*/
 window.addEventListener('beforeunload', (event) => {
@@ -27,17 +31,46 @@ socket.on('connect', function() {
     socket.send('User has connected!',roomname,user);
 });
 
+
+
 </script>
 
 
 <body >
-    <ul>
-        <li>
-    <a href="/home">home</a></li>
-    <li><a href="#">online users</a></li>
-    <li><a href="#">invites</a></li>
-    
-</ul>
+<!--    Made by Erik Terwan    -->
+<!--   24th of November 2015   -->
+<!--        MIT License        -->
+<nav role="navigation">
+    <div id="menuToggle">
+      <!--
+      A fake / hidden checkbox is used as click reciever,
+      so you can use the :checked selector on it.
+      -->
+      <input type="checkbox" />
+      
+      <!--
+      Some spans to act as a hamburger.
+      
+      They are acting like a real hamburger,
+      not that McDonalds stuff.
+      -->
+      <span></span>
+      <span></span>
+      <span></span>
+      
+      <!--
+      Too bad the menu has to be inside of the button
+      but hey, it's pure CSS magic.
+      -->
+      <ul id="menu">
+        <a href="/home"><li>Home</li></a>
+        <a href="/invites"><li>Invites</li></a>
+        <a href="/about"><li>About</li></a>
+        <a href="/logout"><li>Logout</li></a>
+       
+      </ul>
+    </div>
+  </nav>
     <center>
        
             <span id=1 class="sign1">b</span><span id=2 class="sign1">i&nbsp;</span><span id=3 class="sign1">n</span><span id="4" class="sign1">g</span><span id=5 class="sign1">o</span>
@@ -71,6 +104,50 @@ socket.on('connect', function() {
         <button id="btn25" class="button" onclick="check(25,this.id)">24</button><br><br>
         </div>
     </center>
+
+
+    <div id="center-text">
+      
+    <div id="body"> 
+      
+    <div id="chat-circle" class="btn btn-raised">
+            <div id="chat-overlay"></div>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABjUlEQVR4nO2ZTUoDQRCFPwQXblzrBFzpGbyBYKIeQDyABxCTbYKn0J3oGQRJRBRXnsC1S0ElEfzFkoEKDKG7HYNhqkN/UIvJdJFX8/ISqEAikfgPNoAe8AJIhTVQHY1xhjioWLx4qvNXJ/Kmd2AfyKiWDGiqnlxXvWzjhTbkzZZoqq5u2YaBNixiiwXV1Z+GYItW9MEW3yCxBVt8g8QWbPENEluwxTdIMDwVIw5taZAqkeSIMSQ5YgxJjhhDkiPGkOSIMSQ5YgxJjhh3pKbXz2UOW0JGtLVCe60YBslGFhLrocMWEUe1fztsESksILo+J4b0C/ZZohYKtoue0b1WKxRsF43CprFpwJmsTLB9dErsYa8dfTPA5QR3v+1xnkRdbRxmZrQ+HD1bExDfLxPscVjWN3hyuHGr9/KBzLOqYu88S+YbImFXBZ8UXtsGvvRjsEIEzKoT+SA7wDxwCHwDb8AmETAHnBZ+lI6AR71+ANaIhCvHN8oncGzwv5Qg58ArcA+cAXvAUrglkWBa+AHy46cu24+RSgAAAABJRU5ErkJggg=="></i>
+      </div>
+      
+      <div class="chat-box">
+        <div class="chat-box-header">
+          ChatBot
+          <span class="chat-box-toggle"><i class="material-icons">close</i></span>
+        </div>
+        <div class="chat-box-body">
+          <div class="chat-box-overlay">   
+          </div>
+          <div class="chat-logs">
+           
+          </div><!--chat-log -->
+        </div>
+        <div class="chat-input">      
+
+            <input type="text" id="chat-input" placeholder="Send a message..."/>
+          <button type="submit" class="chat-submit" id="chat-submit" onclick="sending_msg(document.getElementById('chat-input').value); "><i class="material-icons">send</i></button>
+             
+        </div>
+      </div>
+      
+      
+      
+      
+    </div>
+    
+    
+
+
+
+      
+       
+    
+        <button onclick="generate_message(msg, 'self'); ">self
 </body>
 
 <script>
@@ -181,6 +258,98 @@ socket.on('connect', function() {
       document.getElementById(id).className="sign";
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $(function() {
+   
+   
+   
+    
+    
+    $(document).delegate(".chat-btn", "click", function() {
+     
+      $("#chat-input").attr("disabled", false);
+      
+    })
+    
+    $("#chat-circle").click(function() {    
+      $("#chat-circle").toggle('scale');
+      $(".chat-box").toggle('scale');
+    })
+    
+    $(".chat-box-toggle").click(function() {
+      $("#chat-circle").toggle('scale');
+      $(".chat-box").toggle('scale');
+    })
+    
+  })
+
+
+
+  INDEX=0;
+  function generate_message(msg, type) {
+
+    
+      INDEX++;
+      var str="";
+      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
+      str += "          <span class=\"msg-avatar\">";
+     
+      str += "          <\/span>";
+      str += "          <div class=\"cm-msg-text\">";
+      str += msg;
+      str += "          <\/div>";
+      str += "        <\/div>";
+      $(".chat-logs").append(str);
+      $("#cm-msg-"+INDEX).hide().fadeIn(300);
+      if(type == 'self'){
+       $("#chat-input").val(''); 
+      }    
+      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);    
+      
+    }  
+
+function sending_msg(msg){
+  socket.emit('chat-in-game',roomname,msg,user);
+}
+
+
+    socket.on('chat-response',function(chit){
+  console.log(chit);
+  console.log(user);
+
+  if(chit[1]!=user.toString())
+  {
+  generate_message(chit[0],'user')
+
+  }
+  else
+
+  {
+
+    generate_message(chit[0],'self')
+  }
+
+
+});
 </script>
-<button onclick="glow(1)"></button>
+
 </html>

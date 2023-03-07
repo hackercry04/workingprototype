@@ -516,7 +516,15 @@ def click(index,n,id,roomname):
     socketio.emit('statics',[valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u1)+'r')
     socketio.emit('statics',[valuating(valuate1,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u2)+'r')
    
-    
+#----chat in game
+@socketio.on('chat-in-game')
+def chat_in(roomname,chit,iid):
+    print(chit)
+    socketio.emit('chat-response',[chit,iid],to=roomname)
+
+#-----chat in game 
+
+
     
 
 #----------------------------------
