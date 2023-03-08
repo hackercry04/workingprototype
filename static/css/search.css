@@ -1,0 +1,39 @@
+.search-box{
+    position: absolute;
+    top: 80px;
+    left: 1%;
+    transform: translate(-0%,-50%);
+    background: #2d3436;
+    border-radius: 50px;
+    padding: 5px;
+  }
+ .in{
+    background: none;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    color: white;
+    width: 0;
+    padding: 0;
+  
+  }
+  #bu{
+    background:none;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+  }
+  #li{
+    color: #ff7675;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .search-box:hover>input{
+      width: 300px;
+      padding: 10px 20px;
+      transition: 1s;
+      font-weight: bold;
+      font-family: monospace;
+  
+  }
+  

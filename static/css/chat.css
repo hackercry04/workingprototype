@@ -92,7 +92,7 @@ body, html {height:100%;}
   }
   #chat-input {
     background: #f4f7f9;
-    
+    width:60%; 
     position:relative;
     height:47px;  
     padding-top:10px;
