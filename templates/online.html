@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/online.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/link.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/publicc.css') }}">
     <script src="https://kit.fontawesome.com/a0bfb68051.js"></script>
 
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
@@ -17,7 +18,7 @@ socket.on('users',function(u) {
     document.getElementById("u").innerHTML = "";
     for(a=0;a<u.length;a++)
  {
-    document.getElementById("u").innerHTML+="<li >"+"<br><button class='btn'"+"value="+ u[a]+" onclick=f(this.value)>"+"<span>"+u[a]+"</span>"+"</button>"+"</li>";
+    document.getElementById("u").innerHTML+="<li >"+"<br><img id='img' src=static/image/user.png width=60px >&nbsp;&nbsp&nbsp;&nbsp<button data-hover='invite!!' class='btn'"+"value="+ u[a]+" onclick=f(this.value)>"+"<div>"+u[a]+"</div>"+"</button>"+"</li>";
  }
     console.log(u[a]);
 
@@ -44,17 +45,17 @@ socket.on('users',function(u) {
             <button id=bu type="button" name="button"><i id=li class="fas fa-search"></i></button>
           
           </div>
-        
+          
         <br><br>
 
        </div>
         <div class="left">
-            
+            <div class="background-image"></div>
         <ul id="mylist">
         <div id="u"></div>
         </div>
     </ul>
-        
+    <h1>Public place</h1>
         <div class="right">
             chat
             <div id="ff">
@@ -133,7 +134,7 @@ deletemsg();
 
 function displaymsg(m)
 {
- document.getElementById("ff").innerHTML+="<li id='chat-text'>"+m[0]+'<br>&nbsp;&nbsp;&nbsp;&nbsp;'+m[1]+"</li>"
+ document.getElementById("ff").innerHTML+="<li id='chat-text'><div id='name-chat'>&nbsp; "+m[0]+':-</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id=cmsg>&nbsp;&nbsp;'+m[1]+"</div><br></li>"
 
 
 }
@@ -143,7 +144,7 @@ function deletemsg()
 {
  div=document.getElementById('ff');
  li=div.getElementsByTagName("li")
- if(li.length>19)
+ if(li.length>8)
  {
 
     li[0].remove()
