@@ -1,7 +1,7 @@
 <html>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/t.css') }}"> 
-    <body>
+    <body >
         <div class="text-center">
     <button id="btn1"  onclick="assignvalue(this.id)">&nbsp;</button>
     <button id="btn2" onclick="assignvalue(this.id)">&nbsp;</button>
@@ -29,19 +29,26 @@
     <button id="btn23" onclick="assignvalue(this.id)">&nbsp;</button>
     <button id="btn24" onclick="assignvalue(this.id)">&nbsp;</button>
     <button id="btn25" onclick="assignvalue(this.id)">&nbsp;</button><br>
-    <input type="button" id="reset" value="reset" onclick="reset()">      <input type="button" id="start" value="start game" onclick="transport()">
+    <input type="button" id="reset" value="reset" onclick="reset()">     <div onmouseover="dis()"><input type="button"  id="start" value="start game" onclick="transport()"></div>
 
 </div>
-<script src="{{ url_for('static', filename='js/selecting.js') }}"></script>
-    /* selecting algorithm
-    ========================================== */
+<script src="{{ url_for('static', filename='js/selecting.js') }}"> /*
+    selecting algorithm
+    */</script>
+   
     
     
-   </script>
+   
    
     
 
 <script>
+
+
+
+
+
+
 
     /*
     link retrieving 
@@ -71,8 +78,23 @@ function transport()
 }
 
 
+
+
+
+
+
+
+
+
 </script>
 
     
+
+
+<script>
+
+
+
+</script>
     </body>
 </html>

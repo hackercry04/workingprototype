@@ -1,4 +1,40 @@
 
+
+    /*disable button*/
+  function dis(){  
+    k=0
+
+    for (j=1;j<26;j++)
+    {
+        if (!isNaN(exnum[j]))
+        {
+            k++
+        }
+
+    }
+
+
+
+     if(k!=25)
+     {
+
+      document.getElementById('start').disabled=true;
+      console.log("disabled")
+     }
+     else
+     {
+
+      document.getElementById('start').disabled=false;
+     }
+
+
+    }
+
+
+
+
+
+
 function reset()
    {
       var exnum=[]
@@ -6,7 +42,7 @@ function reset()
       for (j=1;j<26;j++)
         {btid="btn"+j
         
-            document.getElementById(btid).innerHTML='&nbsp;';
+            document.getElementById(btid).innerHTML=undefined;
 
         }
      
@@ -15,6 +51,8 @@ function reset()
     var i=0;
     
     var exnum=[]
+
+
     function assignvalue(id)
     {
 
@@ -43,6 +81,6 @@ function reset()
             exnum[j]=document.getElementById(btid).textContent
 
         }
+     console.log(exnum)
      
-
     }

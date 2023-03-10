@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/link.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/publicc.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bell.css') }}">
     <script src="https://kit.fontawesome.com/a0bfb68051.js"></script>
 
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
@@ -51,11 +52,19 @@ socket.on('users',function(u) {
        </div>
         <div class="left">
             <div class="background-image"></div>
+            <div id="mylist-container">
         <ul id="mylist">
         <div id="u"></div>
         </div>
+        </div>
     </ul>
-    <h1>Public place</h1>
+
+    <div class="bell">
+    <div class="ringBell">
+        <span class="-count">3</span>
+      </div>
+      </div>
+    <h1>Community Corner</h1>
         <div class="right">
             chat
             <div id="ff">
@@ -65,7 +74,7 @@ socket.on('users',function(u) {
             
             </div>
             <div class="chatbox">
-                <input type="text" id="text"><button  class="glow-on-hover"  onclick="sendmsg()">send</button>
+                <input type="text" id="text" placeholder="Type something here"><button  class="glow-on-hover"  onclick="sendmsg()">send</button>
             </div>
 
 
@@ -151,6 +160,22 @@ function deletemsg()
  }
 
 }
+
+
+
+
+
+
+
+
+/*
+
+scroll functionality 
+
+*/
+
+
+
 </script>
 
 </html>

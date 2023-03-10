@@ -26,7 +26,11 @@ li:hover{
 
  /* Control the left side */
  .left {
+
  
+  width: 200px;
+  height: 800px; /* set a fixed height for the ul */
+  overflow-y: auto;
     float:left;
   width:30%;
   
