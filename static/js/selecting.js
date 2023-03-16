@@ -5,11 +5,14 @@
     k=0
 
     for (j=1;j<26;j++)
-    {
-        if (!isNaN(exnum[j]))
+    
+    {if (exnum[j]!=undefined && exnum[j]!="&nbsp;")
+        {exnum[j]=exnum[j].trim();
+        if (exnum[j].length!=0 )
         {
             k++
         }
+    }
 
     }
 
@@ -37,12 +40,14 @@
 
 function reset()
    {
-      var exnum=[]
+     
       i=0
       for (j=1;j<26;j++)
         {btid="btn"+j
         
-            document.getElementById(btid).innerHTML=undefined;
+            document.getElementById(btid).innerHTML="&nbsp;";
+            exnum[j]="&nbsp;"
+            k=0;
 
         }
      

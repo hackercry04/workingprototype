@@ -732,6 +732,57 @@ def removelink(msg):
 
 
 
+##befor starting the game ,controls the online offline activity of users 
+
+    
+@login_required
+@socketio.on('message',namespace='/onlinestatus')
+def onstatus(msg):
+    print('chat online connected------------------------------------------------',msg)
+
+
+
+
+@socketio.on('status',namespace='/onlinestatus')
+
+def ss(r,u):
+        
+    join_room(r)
+    socketio.emit('st',u,to=r,namespace='/onlinestatus')
+    
+  #get request to identify disconnect and start  
+@login_required
+@app.route("/dis")
+def dicon():
+    room=request.args.get('room')
+    print('room is going to disconnect ',room)
+    socketio.emit('st','disconnected',to=room,namespace='/onlinestatus')
+    leave_room(room)
+
+    return 'success'
+
+@login_required
+@app.route("/startss")
+def msg_start():
+    room=request.args.get('room')
+    print('user started the gam ein the room ',room)
+    socketio.emit('st','started',to=room,namespace='/onlinestatus')
+    leave_room(room)
+
+    return 'success'
+#----------------------------------------------------------
+    
+
+@socketio.on('bingo-w')
+def won(u,r):
+
+    print('we won fhsjdkhfsdjhfjaksdhjfgsdhjfgsjdhfsjdhfiusdghiufsdiufysdi')
+    socketio.emit('bingo-win',u,to=r)
+
+
+
+
+
 
 
 

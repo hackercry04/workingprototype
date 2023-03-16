@@ -239,7 +239,8 @@ socket.on('connect', function() {
 
     if(count>=5)
     {
-        alert("bingo");
+        
+        socket.emit('bingo-w',user,roomname)
     }
     console.log(count)
     if (count!=0)
@@ -350,6 +351,33 @@ function sending_msg(msg){
 
 
 });
+
+
+/*win or lose*/
+
+socket.on('bingo-win',function(u){
+
+
+if (user!=u)
+{
+  alert("bingo you lose!")
+  window.location.replace("/online")
+}
+
+else
+
+{
+
+  alert("bingo you won ")
+  window.location.replace("/online")
+}
+
+});
+
+
+
+
+
 </script>
 
 </html>

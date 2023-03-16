@@ -8,6 +8,12 @@
     background: linear-gradient(to left, #0f172b , #0a193b);
     font-family: 'Oswald', sans-serif;
   }
+.text-center{
+
+  top: 60%;
+}
+
+
   .button {
     text-align: center;
     text-transform: uppercase;
@@ -19,8 +25,8 @@
     border: none;
     color: #fff;
    
-    width: 60px;
-    height:60px;
+    width: 80px;
+    height:80px;
     text-align: center;
     transition-duration: 0.4s;
     overflow: hidden;
@@ -58,8 +64,8 @@
     border: none;
     color: #fff;
    
-    width: 60px;
-    height:60px;
+    width: 80px;
+    height:80px;
     text-align: center;
     transition-duration: 0.4s;
     overflow: hidden;
@@ -80,3 +86,8 @@
     background-color: #1abc9c;
   }
   .button:focus { outline:0; }
+
+
+
+
+

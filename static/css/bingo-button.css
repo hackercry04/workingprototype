@@ -1,0 +1,273 @@
+
+
+
+
+
+
+
+
+      
+
+  .button{
+    
+    background: #407efb;
+    border: none;
+    border-bottom: 6px solid #001fff;
+    padding: 16px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    
+    transition: all 0.1s;
+    outline: none;
+  }
+  .button:hover{
+    transform: translateY(-2px);
+    border-bottom-width: 3px;
+    cursor: pointer;
+  }
+  .button:active{
+    transform: translateY(5px);
+    border-bottom-width: 0px;
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, #0f172b , #0a193b);
+    font-family: 'Oswald', sans-serif;
+  }
+
+
+
+
+  .button{
+    
+    width: 80px;
+    height: 80px;
+    background: #407efb;
+    border: none;
+    border-bottom: 6px solid #001fff;
+    padding: 16px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    
+    transition: all 0.1s;
+    outline: none;
+  }
+  .button:hover{
+    transform: translateY(-2px);
+    border-bottom-width: 3px;
+    cursor: pointer;
+  }
+  .button:active{
+    transform: translateY(5px);
+    border-bottom-width: 0px;
+  }
+  
+  
+
+#select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+/*reset start button */
+
+.description, .link {
+  font-family: 'Amatic SC', cursive;
+  
+}
+
+.description {
+	font-size: 35px;
+}
+
+.btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.btn span {
+  position: relative; 
+  z-index: 1;
+}
+
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #d27b78;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.link {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.link a {
+  color: #000;
+  font-size: 25px; 
+}
+
+.btn {
+  position: absolute;
+  top: 55%;
+  left: 43%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.description, .link {
+  font-family: 'Amatic SC', cursive;
+  
+}
+
+.description {
+	font-size: 35px;
+}
+
+.btn1 {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.btn1 span {
+  position: relative; 
+  z-index: 1;
+}
+
+.btn1:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #95d278;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn1:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.link {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.link a {
+  color: #000;
+  font-size: 25px; 
+}
+
+.btn1 {
+  position: absolute;
+  top: 55%;
+  left: 57%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+div {
+  padding: 5px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

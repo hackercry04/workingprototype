@@ -1,37 +1,122 @@
 <html>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/t.css') }}"> 
-    <body >
-        <div class="text-center">
-    <button id="btn1"  onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn2" onclick="assignvalue(this.id)">&nbsp;</button>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bingo-button.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/toggle.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/active.css') }}"> 
+    
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
 
-    <button id="btn3" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn4"  onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn5" onclick="assignvalue(this.id)">&nbsp;</button><br>
-    <button id="btn6" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn7" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn8" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn9" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn10" onclick="assignvalue(this.id)">&nbsp;</button><br>
-    <button id="btn11" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn12" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn13" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn14" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn15" onclick="assignvalue(this.id)">&nbsp;</button><br>
-    <button id="btn16" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn17" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn18" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn19" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn20" onclick="assignvalue(this.id)">&nbsp;</button><br>
-    <button id="btn21" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn22" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn23" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn24" onclick="assignvalue(this.id)">&nbsp;</button>
-    <button id="btn25" onclick="assignvalue(this.id)">&nbsp;</button><br>
-    <input type="button" id="reset" value="reset" onclick="reset()">     <div onmouseover="dis()"><input type="button"  id="start" value="start game" onclick="transport()"></div>
+
+<!--navigation bar>
+<!--    Made by Erik Terwan    -->
+<!--   24th of November 2015   -->
+<!--        MIT License        -->
+<nav role="navigation">
+    <div id="menuToggle">
+      <!--
+      A fake / hidden checkbox is used as click reciever,
+      so you can use the :checked selector on it.
+      -->
+      <input type="checkbox" />
+      
+      <!--
+      Some spans to act as a hamburger.
+      
+      They are acting like a real hamburger,
+      not that McDonalds stuff.
+      -->
+      <span></span>
+      <span></span>
+      <span></span>
+      
+      <!--
+      Too bad the menu has to be inside of the button
+      but hey, it's pure CSS magic.
+      -->
+      <ul id="menu">
+        <a href="/home"><li>Home</li></a>
+        <a href="/invites"><li>Invites</li></a>
+        <a href="/about"><li>About</li></a>
+        <a href="/logout"><li>Logout</li></a>
+       
+      </ul>
+    </div>
+  </nav>
+
+
+
+    <-->
+
+
+    <script>
+    
+        var socket = io.connect('http://127.0.0.1:5000/onlinestatus');
+        socket.on('connect', function() {
+        socket.send('User has connected! on pnline status ');
+    });
+    
+    
+    
+    
+
+    
+    
+    
+    </script>
+
+    
+    <body >
+        <center>
+        <div class="text-center">
+    <button class="button" id="btn1"  onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button" id="btn2" onclick="assignvalue(this.id)">&nbsp;</button>
+
+    <button class="button"id="btn3" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn4"  onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn5" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button class="button"id="btn6" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn7" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn8" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn9" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn10" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button class="button"id="btn11" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn12" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn13" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn14" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn15" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button class="button"id="btn16" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn17" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn18" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn19" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn20" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    <button class="button"id="btn21" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn22" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn23" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn24" onclick="assignvalue(this.id)">&nbsp;</button>
+    <button class="button"id="btn25" onclick="assignvalue(this.id)">&nbsp;</button><br>
+    </div>
+    </center>
 
 </div>
+<div id="select">
+<button class='btn' id="reset" value="reset" onclick="reset()"><span>Reset game</span></button>     <div onmouseover="dis()"><button  class='btn1' id="start" value="start game" onclick="window.removeEventListener('beforeunload', beforeUnloadListener),start_msg(),transport()"><span>Start game</span></button>
+
+</div>
+
+
+
+
+
+<!--active-->
+
+<div id="active">your opponent's status: <span style="color:red ;"> offline</span></div>
+
+
+
+
+
+
+
 <script src="{{ url_for('static', filename='js/selecting.js') }}"> /*
     selecting algorithm
     */</script>
@@ -91,10 +176,102 @@ function transport()
     
 
 
+
+
 <script>
 
+function send_status(){
+socket.emit('status',roomname,user)
+console.log('sending status')
+}
 
+setInterval(send_status,1000)
+
+
+
+
+
+/*selecting a specific span */
+
+sp= document.querySelector('#active span');
+
+socket.on('st',function(indicator)
+
+{
+    
+  
+    
+
+if (user!=indicator)
+{
+   
+   
+   sp.textContent=" active...."
+   sp.style.color = 'green';
+
+}
+if(indicator=='disconnected')
+{
+    
+   sp.textContent=" disconnected"
+   sp.style.color = 'red';
+
+}
+
+if(indicator=='started')
+{
+    
+   sp.textContent="started the game "
+   sp.style.color = 'orange';
+
+}
+
+
+
+
+
+
+
+
+
+
+}
+
+);
+
+
+
+
+
+
+
+
+var beforeUnloadListener = function(event) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://127.0.0.1:5000/dis?room="+roomname);  
+  xhttp.send(); 
+};
+
+
+
+
+
+window.addEventListener('beforeunload', beforeUnloadListener);
+
+
+
+
+
+
+function start_msg()
+{
+    var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "http://127.0.0.1:5000/startss?room="+roomname);  
+xhttp.send(); 
+    
+}
 
 </script>
+
     </body>
 </html>

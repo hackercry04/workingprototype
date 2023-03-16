@@ -13,6 +13,7 @@
  {
 
    font-family: "Avenir Next", "Avenir", sans-serif;
+   overflow: hidden;
  }
  
  #menuToggle
@@ -38,7 +39,7 @@
  
  #menuToggle a:hover
  {
-   color: tomato;
+   color: rgb(226, 119, 100);
  }
  
  
@@ -100,7 +101,7 @@
  {
    opacity: 1;
    transform: rotate(45deg) translate(-2px, -1px);
-   background: #232323;
+   background: #63f5e9;
  }
  
  /*
@@ -127,7 +128,7 @@
  #menu
  {
    position: absolute;
-   width: 300px;
+   width: 250px;
    margin: -100px 0 0 -50px;
    padding: 50px;
    padding-top: 125px;
