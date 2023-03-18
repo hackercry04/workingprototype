@@ -20,7 +20,7 @@ socket.on('users',function(u)
     for (i=0;i<l;i++)
     {
    
-    document.getElementById("u").innerHTML+='<div class="container"><div class="card"><div class="face face1"><div class="content"><i class="fab fa-windows"></i>            <h3><img src=/static/image/mail-256.png><br>You Got An Invitation From '+u[i][3]+'</h3></div></div><div class="face face2"><div class="content"><p>room name is '+u[i][1] +'</p><a id=accept href="bingo?room='+u[i][1]+'&user=2" value='+u[i][1]+' type="button" onclick=accept(this.value)>Accept</a><a href=# type="button" onclick=reject(this.value)>Reject</a></div></div></div><br><br><br>'
+    document.getElementById("u").innerHTML+='<div class="container"><div class="card"><div class="face face1"><div class="content"><i class="fab fa-windows"></i>            <h3><img src=/static/image/mail-256.png><br>You Got An Invitation From '+u[i][3]+'</h3></div></div><div class="face face2"><div class="content"><p>room name is '+u[i][1] +'</p><a id=accept href="bingo?room='+u[i][1]+'&user=2" value='+u[i][1]+' type="button" onclick=accept(this.value)>Accept</a><a href=#  value='+u[i][1]+ ' onclick=reject("'+u[i][1]+'")>Reject</a></div></div></div><br><br><br>'
  
 console.log( typeof(u))
     console.log(u["1"]);
@@ -55,6 +55,7 @@ function reject(r)
 {
   socket.emit('removelink',r);
   remove_link_from_screen()
+  console.log(r)
 
 }
 

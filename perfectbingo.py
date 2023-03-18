@@ -670,6 +670,13 @@ def get_name():
     
     return user_id
 
+def remove_invites(r):
+    db=sqlite3.connect('arrays.db')
+    cursor=db.cursor()
+    delete_link="delete from invites where roomname=?"
+    cursor.execute(delete_link,[r])
+    db.commit()
+    cursor.close()
 
 
 #online users------------------------------------------------
@@ -712,8 +719,8 @@ def sendinvite(msg):
     
 
 @socketio.on('removelink',namespace='/sendinvite')
-def removelink(msg):
-    pass
+def removelink(r):
+    remove_invites(r)
     
 
 
