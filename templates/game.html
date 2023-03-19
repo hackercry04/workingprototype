@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/t.css') }}"> 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/toggle.css') }}"> 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/active_button.css') }}"> 
 
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
 <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
@@ -31,7 +32,7 @@ socket.on('connect', function() {
     socket.send('User has connected!',roomname,user);
 });
 
-
+active_buttons=[]
 
 </script>
 
@@ -219,11 +220,15 @@ socket.on('connect', function() {
     socket.on('light',function(n) {
 
       
+
         console.log("received number is :");
         console.log(exnum.indexOf(n));
         n=exnum.indexOf(n);
+        
         id="btn"+n
         document.getElementById(id).className="button1"
+        active_buttons.push(n)
+        color_check()
     });
 
 
@@ -373,6 +378,189 @@ else
 }
 
 });
+
+
+
+
+
+/***
+ * color checking algorithm
+ * **/
+
+function color_check()
+{
+
+
+ if (active_buttons.includes(1)&&active_buttons.includes(2)&&active_buttons.includes(3)&&active_buttons.includes(4)&&active_buttons.includes(5))
+
+ {
+  console.log('row is completed')
+  for(i=1;i<6;i++)
+  {
+  id="btn"+i
+  document.getElementById(id).className="buttonc"
+  }
+ }
+
+
+
+
+ if (active_buttons.includes(6)&&active_buttons.includes(7)&&active_buttons.includes(8)&&active_buttons.includes(9)&&active_buttons.includes(10))
+
+{
+ console.log('row is completed')
+ for(i=6;i<11;i++)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+if (active_buttons.includes(11)&&active_buttons.includes(12)&&active_buttons.includes(13)&&active_buttons.includes(14)&&active_buttons.includes(15))
+
+{
+ console.log('row is completed')
+ for(i=11;i<16;i++)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+
+if (active_buttons.includes(16)&&active_buttons.includes(17)&&active_buttons.includes(18)&&active_buttons.includes(19)&&active_buttons.includes(20))
+
+{
+ console.log('row is completed')
+ for(i=16;i<21;i++)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+if (active_buttons.includes(21)&&active_buttons.includes(22)&&active_buttons.includes(23)&&active_buttons.includes(24)&&active_buttons.includes(25))
+
+{
+ console.log('row is completed')
+ for(i=21;i<26;i++)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+
+
+
+
+
+
+
+
+if (active_buttons.includes(1)&&active_buttons.includes(7)&&active_buttons.includes(13)&&active_buttons.includes(19)&&active_buttons.includes(25))
+
+{
+ console.log('row is completed')
+ for(i=1;i<26;i=i+6)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+if (active_buttons.includes(5)&&active_buttons.includes(9)&&active_buttons.includes(13)&&active_buttons.includes(17)&&active_buttons.includes(21))
+
+{
+ console.log('row is completed')
+ for(i=5;i<22;i=i+4)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+
+
+
+
+
+if (active_buttons.includes(1)&&active_buttons.includes(6)&&active_buttons.includes(11)&&active_buttons.includes(16)&&active_buttons.includes(21))
+
+{
+ console.log('row is completed')
+ for(i=1;i<22;i=i+5)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+
+if (active_buttons.includes(2)&&active_buttons.includes(7)&&active_buttons.includes(12)&&active_buttons.includes(17)&&active_buttons.includes(22))
+
+{
+ console.log('row is completed')
+ for(i=2;i<23;i=i+5)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+if (active_buttons.includes(3)&&active_buttons.includes(8)&&active_buttons.includes(13)&&active_buttons.includes(18)&&active_buttons.includes(23))
+
+{
+ console.log('row is completed')
+ for(i=3;i<24;i=i+5)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+if (active_buttons.includes(4)&&active_buttons.includes(9)&&active_buttons.includes(14)&&active_buttons.includes(19)&&active_buttons.includes(24))
+
+{
+ console.log('row is completed')
+ for(i=4;i<25;i=i+5)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+if (active_buttons.includes(5)&&active_buttons.includes(10)&&active_buttons.includes(15)&&active_buttons.includes(20)&&active_buttons.includes(25))
+
+{
+ console.log('row is completed')
+ for(i=5;i<26;i=i+5)
+ {
+ id="btn"+i
+ document.getElementById(id).className="buttonc"
+ }
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,30 @@
+
+.text-center{
+
+  top: 60%;
+}
+
+
+  .buttonc {
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 22px;
+    
+    position: relative;
+    background-color: #52f382;
+    border: none;
+    color: #fff;
+   
+    width: 80px;
+    height:80px;
+    text-align: center;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    
+    border-radius: 4px;
+  }
+
+ 
+
+  
