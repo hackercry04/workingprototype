@@ -679,6 +679,18 @@ def remove_invites(r):
     cursor.close()
 
 
+def invite_count():
+    db=sqlite3.connect('arrays.db')
+    cursor=db.cursor()
+    name=get_name()
+    get_count="select count(*) from invites where uname=?"
+    c=cursor.execute(get_count,[name]).fetchall()[0][0]
+    db.commit()
+    cursor.close()
+    return c
+
+
+
 #online users------------------------------------------------
 @login_required
 @socketio.on('message',namespace='/onlineusers')
@@ -787,7 +799,14 @@ def won(u,r):
     socketio.emit('bingo-win',u,to=r)
 
 
+#invite count
 
+@socketio.on('count',namespace='/onlineusers')
+def fc():
+ 
+    c=invite_count()
+   
+    socketio.emit('cou',c,namespace='/onlineusers')
 
 
 

@@ -174,8 +174,24 @@ scroll functionality
 
 */
 
+/*get the count of invites*/
+function countz(){
+socket.emit('count')
 
 
+}
+
+
+setInterval(countz,2000)
+
+
+socket.on('cou',function(c){
+  t=document.querySelector('.-count');
+  t.textContent=c;
+
+
+
+});
 </script>
 
 </html>
