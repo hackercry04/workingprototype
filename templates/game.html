@@ -104,6 +104,7 @@ active_buttons=[]
         <button id="btn24" class="button" onclick="check(24,this.id)">23</button>&nbsp;
         <button id="btn25" class="button" onclick="check(25,this.id)">24</button><br><br>
         </div>
+        <div id="turn-color"></div>
     </center>
 
 
@@ -157,7 +158,31 @@ active_buttons=[]
    socket.on('turn',function(t)
    {
     turn=t;
-    
+    console.log('turn')
+    console.log(turn)
+
+    msg=document.querySelector('#turn-color')
+
+    if(turn%2==parseInt(user)%2)
+      {
+        console.log('your')
+        
+        msg.textContent='your turn'
+        msg.style.color='rgb(101, 255, 165)'
+
+      } 
+      
+      else
+
+      {
+        console.log('his')
+        msg.textContent="opponent's turn"
+        msg.style.color='rgb(255, 101, 101)'
+      }
+
+
+
+
    }
    );
    console.log(user)
@@ -189,13 +214,15 @@ active_buttons=[]
 
     function check(index,id)
     {    
-        
+      
+
+
         console.log(index)
        
 
         if(user==1 && turn%2==1){
-            console.log("user 1 turn is : ",turn)
-            console.log("user1 played and next is user2 ")
+            
+            
     console.log(turn%2);
         socket.emit('clicked',index,exnum[index],user,roomname)
         }
@@ -206,8 +233,7 @@ active_buttons=[]
 
         else if (user==2 && turn%2==0)
         {
-            console.log("user2 turn is : ",turn)
-            console.log("user2 played and next is user1 ")
+            
     console.log(turn%2);
             socket.emit('clicked2',index,exnum[index],user,roomname)
 

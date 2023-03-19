@@ -138,5 +138,20 @@ body{
     box-shadow: inset 0px 0px 10px rgba(3, 252, 36, 0.5);
   }
 
+
+
+  #no-invites{
+position: absolute;
+font-size: 100px;
+color: rgb(62, 63, 63);
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+
+  }
+
  
+  
+
   

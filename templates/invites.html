@@ -1,7 +1,10 @@
 <html>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/invites.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/link copy.css') }}"> 
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+
     
+    <div id="no-invites"></div>
 <script>
     
     var socket = io.connect('http://127.0.0.1:5000/sendinvite');
@@ -9,32 +12,59 @@
     socket.send('User has connected! on send invite endpoint ');
 });
 
+function empty()
+{
 
+c = document.getElementsByClassName('container').length
+msg=document.querySelector('#no-invites')
+
+if(c==0)
+{
+
+  msg.textContent=' no invites found'
+
+}
+
+else{
+
+    msg.textContent=''
+
+}
+
+}
 
 socket.on('users',function(u)
 
 {
+    
     document.getElementById("u").innerHTML="";
     l=Object.keys(u).length
 
     for (i=0;i<l;i++)
     {
    
-    document.getElementById("u").innerHTML+='<div class="container"><div class="card"><div class="face face1"><div class="content"><i class="fab fa-windows"></i>            <h3><img src=/static/image/mail-256.png><br>You Got An Invitation From '+u[i][3]+'</h3></div></div><div class="face face2"><div class="content"><p>room name is '+u[i][1] +'</p><a id=accept href="bingo?room='+u[i][1]+'&user=2" value='+u[i][1]+' type="button" onclick=accept("'+u[i][1]+'")>Accept</a><a href=#  value='+u[i][1]+ ' onclick=reject("'+u[i][1]+'")>Reject</a></div></div></div><br><br><br>'
+    document.getElementById("u").innerHTML+='<div class="container" onmouseover=empty()><div class="card"><div class="face face1"><div class="content"><i class="fab fa-windows"></i>            <h3><img src=/static/image/mail-256.png><br>You Got An Invitation From '+u[i][3]+'</h3></div></div><div class="face face2"><div class="content"><p>room name is '+u[i][1] +'</p><a id=accept href="bingo?room='+u[i][1]+'&user=2" value='+u[i][1]+' type="button" onclick=accept("'+u[i][1]+'")>Accept</a><a href=#  value='+u[i][1]+ ' onclick=reject("'+u[i][1]+'")>Reject</a></div></div></div><br><br><br>'
  
 console.log( typeof(u))
     console.log(u["1"]);
 
     }
 
-    
+    empty()
 });
+
 </script>
 
 
 
 
 <body>
+    <div class="top">
+        <center><p>&nbsp;<a href="/home" id="style-2" data-replace="HOME"><span>HOME</span></a>&nbsp;&nbsp;&nbsp;<a href="/invites" id="style-2" data-replace="INVITES"><span>INVITES</span></a>&nbsp;&nbsp;&nbsp;<a href="/online" id="style-2" data-replace="ONLINE"><span>ONLINE</span></a>&nbsp;&nbsp;&nbsp;<a href="/logout" id="style-2" data-replace="LOGOUT"><span>LOGOUT</span></a></p> <br><br></center>
+        </div>
+
+
+
 <br><br><br>
 <div id="u"></div>
 
@@ -67,9 +97,14 @@ function reject(r)
 function remove_link_from_screen()
 {const d = document.querySelector('.container');
 d.remove()
+empty()
 
 
 }
+
+window.onload=empty
+
+
 </script>
 
 </html>

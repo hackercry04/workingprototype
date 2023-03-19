@@ -683,11 +683,12 @@ def invite_count():
     db=sqlite3.connect('arrays.db')
     cursor=db.cursor()
     name=get_name()
+    join_room(name)
     get_count="select count(*) from invites where uname=?"
     c=cursor.execute(get_count,[name]).fetchall()[0][0]
     db.commit()
     cursor.close()
-    return c
+    return c,name
 
 
 
@@ -804,9 +805,10 @@ def won(u,r):
 @socketio.on('count',namespace='/onlineusers')
 def fc():
  
-    c=invite_count()
+    c,n=invite_count()
    
-    socketio.emit('cou',c,namespace='/onlineusers')
+    socketio.emit('cou',c,namespace='/onlineusers',to=n)
+    leave_room(n)
 
 
 
