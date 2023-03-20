@@ -9,6 +9,9 @@ import sqlite3
 from termcolor import colored
 from colorama import Fore
 from flask_login import LoginManager,UserMixin,login_user,logout_user,login_required,current_user
+import logging
+from werkzeug.serving import WSGIRequestHandler
+
 app = Flask(__name__)
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///arrays.db'
@@ -18,7 +21,10 @@ db = SQLAlchemy(app)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-
+logger = logging.getLogger('werkzeug')
+logger.setLevel(logging.ERROR)
+handler = logging.StreamHandler()
+logger.addHandler(handler)
 
 
 
@@ -207,6 +213,7 @@ def delete():
 
 
 
+
 ##socket start
 
 turn=1
@@ -367,7 +374,10 @@ def getarray_with_id(id):
     cursor = db.cursor()
     getquery="SELECT valuate FROM numers where usession=?"
     f=cursor.execute(getquery,[id]).fetchall()
-    f=literal_eval(f[0][0])
+
+    if (f!=[]):
+       f=literal_eval(f[0][0])
+    print(f)
     db.commit()
     cursor.close()
     return f
@@ -484,7 +494,7 @@ def click(index,n,id,roomname):
     valuate1=getarray_with_id(u2)
     valuate[index]=1
     print("valuate,valuate 1 is",valuate,valuate1)
-    valuate1[user2.index(n)]=1
+    valuate1[user2.index(n)]=1 #to find the position of 0 in [00000 ] array and make it 1
 
     #inserting the updated array to db with ids
     updating(u1,valuate)
