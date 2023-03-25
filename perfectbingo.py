@@ -72,12 +72,28 @@ def sign():
 
 @app.route("/reg",methods=['POST'])
 def register():
-    ruser=request.form['username']
-    rpass=request.form['password']
-    uu=user(username=ruser,password=rpass)
-    db.session.add(uu)
-    db.session.commit()
-    return '<h1>your sign-up is succesfull </h1><a href=/login>click here</a> to login'
+    ruser = request.form['username']
+    rpass = request.form['password']
+    
+    if len(rpass)<=4:
+        flash('Password should be greater than four characters')
+        return render_template("signup.html")
+    
+    
+    elif user.query.filter_by(username=ruser).first():
+        flash('Username already exists. Please choose a different username.')
+        return render_template("signup.html")
+    elif ruser=='' or rpass=='':  
+         flash('Enter username and password')
+         return render_template("signup.html")
+
+
+        
+    else:
+        uu = user(username=ruser, password=rpass)
+        db.session.add(uu)
+        db.session.commit()
+        return '<h1>your sign-up is succesfull </h1><a href=/login>click here</a> to login'
 @app.route("/logout")
 @login_required
 def logout():
@@ -354,8 +370,43 @@ def adding0array(s):
    
    return 0
 
+def storingarraytodb(array):
+   s=session['_user_id']
 
+   db = sqlite3.connect('arrays.db')
+   cursor = db.cursor()
+   sql_update_query = "INSERT INTO numbers(usession,numberarray)  VALUES(?,?)"
+   check='select count(*) from numbers where usession=?'
    
+   if(cursor.execute(check,[s]).fetchall()[0][0]==0):
+   
+     
+     cursor.execute(sql_update_query,[s,str(array)])
+     db.commit()
+     cursor.close()
+    
+   
+   return 0
+
+def removearrays():
+   s=session['_user_id']
+
+   db = sqlite3.connect('arrays.db')
+   cursor = db.cursor()
+   sql_update_query = "delete from numbers where id=?"
+   
+   
+  
+   
+     
+   cursor.execute(sql_update_query,[s])
+   db.commit() 
+   cursor.close()
+    
+   
+   return 'success'
+
+
 
 def updating(i,arr):
     db = sqlite3.connect('arrays.db')
@@ -381,6 +432,22 @@ def getarray_with_id(id):
     db.commit()
     cursor.close()
     return f
+
+def getnumberarray_with_id(id):
+    
+    db = sqlite3.connect('arrays.db')
+    cursor = db.cursor()
+    getquery="SELECT numberarray FROM numbers where usession=?"
+    f=cursor.execute(getquery,[id]).fetchall()
+
+    if (f!=[]):
+       f=literal_eval(f[0][0])
+    print(f)
+    db.commit()
+    cursor.close()
+    return f
+
+
 
 def valuating(v,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12):
             u="null"
@@ -444,6 +511,10 @@ def handleMessage(m,roomname,userid):
     socketio.emit('turn',turn,to=roomname)
 
 
+@socketio.on('storearrays')
+
+def storearrayes(exnum):
+    storingarraytodb(exnum)
 
 
 
@@ -486,7 +557,7 @@ def click(index,n,id,roomname):
     print("user1 clciked number is: ",n,"and id is:  ",id," with index", index)
     print("user2 is=",user2)
     #retrieving values from db
-    print("get_users_from_roomname",get_users_from_group(roomname))
+    print("get_users_from_roomname",get_users_from_group(roomname)) #get user ids with room name(the is is stored in pairs with room name as its heading)
     #geting user with room name
     u1,u2=get_users_from_group(roomname)
     #----------------------------
@@ -521,10 +592,12 @@ def click(index,n,id,roomname):
     print("turn is ",turn)
    
     join_room(str(u1)+'r')
-    print(str(u1)+"joined the room "+str(u1)+'r')
+    print(str(u1)+" joined the room "+str(u1)+'r')
    
     socketio.emit('statics',[valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u1)+'r')
+    print(' u1 ',[valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0)])
     socketio.emit('statics',[valuating(valuate1,0,0,0,0,0,0,0,0,0,0,0,0)],to=str(u2)+'r')
+    print(' u2 ',[valuating(valuate,0,0,0,0,0,0,0,0,0,0,0,0)])
    
 #----chat in game
 @socketio.on('chat-in-game')
@@ -716,6 +789,13 @@ def onlidf(msg):
 def disconnect():
     print("client disconnecte d")
     delete_online_user()
+
+
+
+@socketio.on('disconnect')
+def disconnectdb():
+    print("client disconnecte d")
+    removearrays()    
 
 @socketio.on('invite',namespace='/onlineusers')
 def storeinvite(room,uname):

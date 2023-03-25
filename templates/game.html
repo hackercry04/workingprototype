@@ -9,7 +9,11 @@
 <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
+
+var exnum = JSON.parse(sessionStorage.getItem('values'));
 /*  delete db*/
+
+
 window.addEventListener('beforeunload', (event) => {
 	event.returnValue = `Are you sure you want to leave?`;
 	var xhttp = new XMLHttpRequest();
@@ -30,6 +34,8 @@ xhttp.send();
 
 socket.on('connect', function() {
     socket.send('User has connected!',roomname,user);
+
+    send_array_to_server();
 });
 
 active_buttons=[]
@@ -66,7 +72,7 @@ active_buttons=[]
       <ul id="menu">
         <a href="/home"><li>Home</li></a>
         <a href="/invites"><li>Invites</li></a>
-        <a href="/about"><li>About</li></a>
+        <a href="/online"><li>Online</li></a>
         <a href="/logout"><li>Logout</li></a>
        
       </ul>
@@ -154,6 +160,15 @@ active_buttons=[]
 
 <script>
    
+function send_array_to_server()
+{
+
+  socket.emit('storearrays',exnum)
+}   
+
+
+
+
    
    socket.on('turn',function(t)
    {

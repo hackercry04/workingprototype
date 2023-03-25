@@ -46,7 +46,15 @@ class invites(db.Model):
     roomname=db.Column(db.String(10))  
     uname=db.Column(db.String(10))
     hostname=db.Column(db.String(10))
-    
+
+
+
+class numbers(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+
+
+    usession=db.Column(db.String(50),unique=True) 
+    numberarray=db.Column(db.String(50))   
 
 
 # Creating an SQLAlchemy instance
