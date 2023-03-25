@@ -393,7 +393,7 @@ def removearrays():
 
    db = sqlite3.connect('arrays.db')
    cursor = db.cursor()
-   sql_update_query = "delete from numbers where id=?"
+   sql_update_query = "delete from numbers where usession=?"
    
    
   
@@ -433,12 +433,13 @@ def getarray_with_id(id):
     cursor.close()
     return f
 
-def getnumberarray_with_id(id):
+def getnumberarray_with_id(u):
+    
     
     db = sqlite3.connect('arrays.db')
     cursor = db.cursor()
     getquery="SELECT numberarray FROM numbers where usession=?"
-    f=cursor.execute(getquery,[id]).fetchall()
+    f=cursor.execute(getquery,[u]).fetchall()
 
     if (f!=[]):
        f=literal_eval(f[0][0])
@@ -555,14 +556,17 @@ def click(index,n,id,roomname):
     global clicked ,user1
     clicked=n
     print("user1 clciked number is: ",n,"and id is:  ",id," with index", index)
+    u1,u2=get_users_from_group(roomname)
+    user2=getnumberarray_with_id(u2)
     print("user2 is=",user2)
     #retrieving values from db
     print("get_users_from_roomname",get_users_from_group(roomname)) #get user ids with room name(the is is stored in pairs with room name as its heading)
     #geting user with room name
-    u1,u2=get_users_from_group(roomname)
+   
     #----------------------------
     valuate=getarray_with_id(u1)
     valuate1=getarray_with_id(u2)
+    
     valuate[index]=1
     print("valuate,valuate 1 is",valuate,valuate1)
     valuate1[user2.index(n)]=1 #to find the position of 0 in [00000 ] array and make it 1
@@ -628,6 +632,7 @@ def click2(index,n1,id,roomname):
     #getting users with roomname
     u1,u2=get_users_from_group(roomname)
     #----------------------------------
+    user1=getnumberarray_with_id(u1)
     valuate=getarray_with_id(u1)
     valuate1=getarray_with_id(u2)
     valuate1[index]=1
