@@ -192,6 +192,22 @@ socket.on('cou',function(c){
 
 
 });
+
+
+
+
+
+window.addEventListener('beforeunload', (event) => {
+	event.returnValue = `Are you sure you want to leave?`;
+	var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "http://127.0.0.1:5000/deleteuser?");  /*link required*/
+xhttp.send(); 
+});
+
 </script>
+
+
+
+
 
 </html>

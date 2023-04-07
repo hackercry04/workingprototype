@@ -70,6 +70,15 @@ def load_user(user_id):
 def sign():
     return render_template("signup.html")
 
+
+@app.route("/deleteuser")
+def sfsdf():
+    print("deeleted")
+    delete_online_user()
+    u=get_online_users()
+    socketio.emit("users",u,namespace='/onlineusers')
+    return 0
+
 @app.route("/reg",methods=['POST'])
 def register():
     ruser = request.form['username']
@@ -765,7 +774,13 @@ def remove_invites(r):
     cursor.execute(delete_link,[r])
     db.commit()
     cursor.close()
-
+def get_online_users():
+    db = sqlite3.connect('arrays.db')
+    cursor = db.cursor()
+    select_all="select u from online"
+    all_users=cursor.execute(select_all).fetchall()
+    cursor.close()       
+    return all_users
 
 def invite_count():
     db=sqlite3.connect('arrays.db')
@@ -788,12 +803,6 @@ def onlidf(msg):
     u=add_online_users()
     socketio.emit("users",u,namespace='/onlineusers')
     print('emitted users')
-
-
-@socketio.on('disconnect',namespace='/onlineusers')
-def disconnect():
-    print("client disconnecte d")
-    delete_online_user()
 
 
 
