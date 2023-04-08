@@ -41,14 +41,6 @@ logger.addHandler(handler)
 
 
 
-##login functionality
-
-# adding configuration for using a sqlite database
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
-#app.config['SECRET_KEY']="secret"
- 
-# Creating an SQLAlchemy instance
-db = SQLAlchemy(app)
 
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -56,10 +48,7 @@ Session(app)
 login_manager=LoginManager()
 login_manager.init_app(app)
 
-#class user(UserMixin,db.Model):
-    #id=db.Column(db.Integer,primary_key=True)
-    #username=db.Column(db.String(20),unique=True)
-    #password=db.Column(db.String(20))
+
 
 @login_manager .user_loader
 def load_user(user_id):
@@ -102,7 +91,7 @@ def register():
         uu = user(username=ruser, password=rpass)
         db.session.add(uu)
         db.session.commit()
-        return '<h1>your sign-up is succesfull </h1><a href=/login>click here</a> to login'
+        return '<center><h1>your sign-up is succesfull </h1></center><script>window.location.href = "/login";</script> '
 @app.route("/logout")
 @login_required
 def logout():
@@ -202,9 +191,9 @@ def delete():
 
    db = sqlite3.connect('arrays.db')
    cursor = db.cursor()
-   #user = "select u1,u2 from roomgroup where roomname=?"
+   
    delete_room="delete from rooms where roomn=?"
-   #delete_room_group="delete from roomgroup where roomname=?"
+
    delete_room_group_user="delete  from roomgroup where roomname=? and u1=? or u2=?"
    delete_u='delete from numers where usession=?'
    print("room is",room)
@@ -218,7 +207,7 @@ def delete():
   
    db.commit()
    cursor.close()
-   #print('deleted users are',u1,u2)
+   
    return 0
 
 
@@ -260,7 +249,7 @@ user1=[]
 user2=[]
 
 def insertuserstogroup(room,uid,session):
-    #check='select count(*) from roomgroup where roomname=?'
+    
     print("uid iside function is",uid)
     check='select count(*) from roomgroup where roomname=?'
     db = sqlite3.connect('arrays.db')
