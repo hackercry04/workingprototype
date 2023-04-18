@@ -301,8 +301,9 @@ function send_array_to_server()
 
     function glow(id)
     {
-        id=String(id)
-      document.getElementById(id).className="sign";
+        for (var ty=1;ty<=id;ty++){
+      document.getElementById(ty).className="sign";
+        }
 
     }
 
